@@ -1,0 +1,83 @@
+{% extends "authentication/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="col-12 col-md-9 col-lg-7 offset-lg-5 border-left-lg min-h-screen d-flex flex-column justify-content-center position-relative">
+          
+    <div class="py-lg-16 px-lg-20">
+      <div class="row">
+        <div class="col-lg-10 col-md-9 col-xl-6 mx-auto ms-xl-0">
+          <div class="mt-10 mt-lg-5 mb-6 d-lg-block">
+            <span class="d-inline-block d-lg-block h1 mb-4 mb-lg-6 me-3"
+              >👋</span
+            >
+            <h1 class="ls-tight font-bolder h2">Nice to see you!</h1>
+          </div>
+          <form>
+            <div class="mb-5">
+              <label class="text-muted form-label" for="email"
+                >Email address</label
+              >
+              <input type="email" class="form-control" id="email" />
+            </div>
+            <div class="mb-5">
+              <div
+                class="d-flex align-items-center justify-content-between"
+              >
+                <div>
+                  <label class="text-muted form-label" for="password"
+                    >Password</label
+                  >
+                </div>
+                <div class="mb-2">
+                  <a
+                    href="side-recover.html"
+                    class="text-sm text-muted text-primary-hover text-underline"
+                    >Forgot password?</a
+                  >
+                </div>
+              </div>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                autocomplete="current-password"
+              />
+            </div>
+            <div class="mb-5">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="check_example"
+                  id="check_example"
+                />
+                <label class="text-muted form-check-label" for="check_example"
+                  >Keep me logged in</label
+                >
+              </div>
+            </div>
+            <div>
+              <a href="#" class="btn btn-primary w-full">Sign in</a>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+    
+
+    <div
+      class="position-lg-absolute bottom-0 end-0 my-8 mx-12 text-center text-lg-end"
+    >
+      <small>Already have an account?</small>
+      <a
+        href="side-register.html"
+        class="text-warning text-sm font-semibold"
+        >Sign up</a
+      >
+    </div>
+
+  </div>
+
+  {% endblock %}

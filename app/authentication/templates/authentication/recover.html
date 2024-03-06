@@ -1,0 +1,31 @@
+{% extends "authentication/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="col-12 col-md-9 col-lg-7 offset-lg-5 h-screen min-h-lg-screen d-flex flex-column justify-content-center py-lg-16 px-lg-20 position-relative">
+    <div class="row">
+      <div class="col-lg-10 col-md-9 col-xl-6 mx-auto ms-xl-0">
+        <div class="mb-8">
+          <h3 class="display-5">🔐</h3>
+          <h1 class="h2 ls-tight font-bolder mt-6">Password Reset</h1>
+          <p class="mt-2">
+            Enter your email and we will send you a reset link
+          </p>
+        </div>
+        <form>
+          <div class="mb-5">
+            <label class="form-label text-muted" for="email">Email address</label>
+            <input type="email" class="form-control" id="email" />
+          </div>
+          <div>
+            <a href="#" class="btn btn-primary w-full"
+              >Send me the link</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
