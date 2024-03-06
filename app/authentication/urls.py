@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 app_name = "authentication"
 
 urlpatterns = [
-    path("login", views.login, name="login"),
+    path("signin", views.signin, name="signin"),
     path("register", views.register, name="register"),
     path("recover", views.recover, name="recover"),
 
