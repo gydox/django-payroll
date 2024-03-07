@@ -13,12 +13,26 @@
             >
             <h1 class="ls-tight font-bolder h2">Nice to see you!</h1>
           </div>
-          <form>
+          {% if form.errors %}
+          <div class="alert alert-danger">
+              <ul>
+                  {% for field, errors in form.errors.items %}
+                  {% for error in errors %}
+                  <li>{{ field|title }}: {{ error }}</li>
+                  {% endfor %}
+                  {% endfor %}
+              </ul>
+          </div>
+          </br>
+          {% endif %}
+          <form method="post" action="{% url 'authentication:signin' %}">
+            {% csrf_token %}
+
             <div class="mb-5">
-              <label class="text-muted form-label" for="email"
-                >Email address</label
+              <label class="text-muted form-label" for="username"
+                >Username</label
               >
-              <input type="email" class="form-control" id="email" />
+              <input type="text" class="form-control" id="username" name="username" />
             </div>
             <div class="mb-5">
               <div
@@ -31,7 +45,7 @@
                 </div>
                 <div class="mb-2">
                   <a
-                    href="side-recover.html"
+                    href="{% url 'authentication:register' %}"
                     class="text-sm text-muted text-primary-hover text-underline"
                     >Forgot password?</a
                   >
@@ -41,6 +55,7 @@
                 type="password"
                 class="form-control"
                 id="password"
+                name="password"
                 autocomplete="current-password"
               />
             </div>
@@ -58,7 +73,7 @@
               </div>
             </div>
             <div>
-              <a href="#" class="btn btn-primary w-full">Sign in</a>
+              <button type="submit" class="btn btn-primary w-full">Sign in</button>
             </div>
           </form>
 
@@ -70,9 +85,9 @@
     <div
       class="position-lg-absolute bottom-0 end-0 my-8 mx-12 text-center text-lg-end"
     >
-      <small>Already have an account?</small>
+      <small>Don't have an account?</small>
       <a
-        href="side-register.html"
+        href="{% url 'authentication:register' %}"
         class="text-warning text-sm font-semibold"
         >Sign up</a
       >

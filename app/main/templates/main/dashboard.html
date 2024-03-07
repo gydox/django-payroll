@@ -220,7 +220,13 @@
                   </div>
                 </div>
                 <div class="d-none d-sm-block ms-3">
-                  <span class="h6">Tahlia</span>
+                  <span class="h6">
+                    {% if user.is_authenticated %}
+                    <p>{{ user.username|capfirst }}</p>
+                    {% else %}
+                        <p>Guest</p>
+                    {% endif %}
+                </span>
                 </div>
                 <div class="d-none d-md-block ms-md-2">
                   <i class="bi bi-chevron-down text-muted text-xs"></i></div
@@ -231,7 +237,13 @@
                     >Signed in as</span
                   >
                   <span class="d-block text-heading font-semibold"
-                    >Tahlia Mooney</span
+                    >
+                    {% if user.is_authenticated %}
+                    <p>{{ user.username|capfirst }}</p>
+                    {% else %}
+                        <p>Guest</p>
+                    {% endif %}
+                    </span
                   >
                 </div>
                 <div class="dropdown-divider"></div>
@@ -264,7 +276,12 @@
           <div class="row align-items-center">
             <div class="col-sm col-12">
               <h1 class="h2 ls-tight">
-                <span class="d-inline-block me-3">👋</span>Hi, Tahlia!
+                <span class="d-inline-block me-3">👋</span>
+                {% if user.is_authenticated %}
+                    <p>Hi, {{ user.username|capfirst }}!</p>
+                {% else %}
+                    <p>Welcome, guest!</p>
+                {% endif %}
               </h1>
             </div>
             <div class="col-sm-auto col-12 mt-4 mt-sm-0">
