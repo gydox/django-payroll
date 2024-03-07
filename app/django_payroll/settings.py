@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     # My Apps
     "main",
     "authentication",
+    "employee",
 ]
 
 MIDDLEWARE = [
