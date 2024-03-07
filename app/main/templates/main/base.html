@@ -5,16 +5,22 @@
 
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-    {% include 'main/header.html' %}
+    {% include 'main/head.html' %}
   <body>
     <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
 
       {% include 'main/nav.html' %}
 
+      <div class="flex-lg-1 h-screen overflow-y-lg-auto">
 
-      {% block content %}
+        {% include 'main/nav2.html' %}
 
-      {% endblock %}
+        {% include 'main/header.html' %}
+
+        {% block content %}
+        
+        {% endblock %}
+      </div>
 
     </div>
     <script src="{% static 'assets/js/main.js' %}"></script>
