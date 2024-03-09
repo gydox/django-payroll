@@ -9,4 +9,5 @@ app_name = "employee"
 
 urlpatterns = [
     path('', views.employee_list, name='employee_list'),
+    path('edit', views.edit_employee, name='edit_employee'),
 ]
