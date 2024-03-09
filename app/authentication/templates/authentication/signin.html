@@ -25,7 +25,7 @@
           </div>
           </br>
           {% endif %}
-          <form method="post" action="{% url 'authentication:signin' %}">
+          <form id="myForm" method="post" action="{% url 'authentication:signin' %}" onsubmit="submitForm(event)">
             {% csrf_token %}
 
             <div class="mb-5">
@@ -62,9 +62,20 @@
             <div class="mb-5">
             </div>
             <div>
-              <button type="submit" class="btn btn-primary w-full">Sign in</button>
+              <button type="submit" class="btn btn-primary w-full" id="signInButton">Sign in</button>
             </div>
           </form>
+
+
+          <!-- Loading spinner HTML -->
+          <div id="loadingSpinner" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;" class="d-none text-primary text-center" role="status">
+            <div class="spinner-border mb-2" role="status"></div>
+            {% comment %} <span class="sr-only">Loading...</span> {% endcomment %}
+            <br>
+            <span class="text-muted">Authenticating</span>
+          </div>
+
+
 
         </div>
       </div>
@@ -83,5 +94,22 @@
     </div>
 
   </div>
+
+  <script>
+      function submitForm(event) {
+          event.preventDefault(); // Prevent form submission
+
+          // Disable the button
+          document.getElementById('signInButton').disabled = true;
+
+          // Show the loading spinner
+          document.getElementById('loadingSpinner').classList.remove('d-none');
+
+          // Submit the form after a short delay (to allow the loading spinner to be displayed)
+          setTimeout(() => {
+              document.getElementById('myForm').submit();
+          }, 500); // Adjust the delay as needed
+      }
+  </script>
 
   {% endblock %}
