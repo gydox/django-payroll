@@ -1,0 +1,28 @@
+{% load static %}
+{% load i18n %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+    {% include 'main/head.html' %}
+  <body>
+    <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+
+      {% include 'main/nav.html' %}
+
+      <div class="flex-lg-1 h-screen overflow-y-lg-auto">
+
+        {% include 'main/nav2.html' %}
+
+        {% include 'employee/header.html' %}
+
+        {% block content %}
+        
+        {% endblock %}
+      </div>
+
+    </div>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+  </body>
+</html>
