@@ -77,7 +77,7 @@
         <div class="ms-5">
           <label for="file-upload" class="btn btn-sm btn-neutral">
             <span>Upload</span>
-            <input type="file" id="file-upload" name="photo" >
+            <input type="file" id="file-upload" name="photo" class="visually-hidden">
           </label>
         </div>
       </div>
@@ -284,7 +284,7 @@
       </div>
       <div class="card">
         <div class="card-header border-bottom d-flex align-items-center">
-          <h5 class="me-auto">All employees</h5>
+          <h5 class="me-auto">Full Time Employees</h5>
           {% comment %} <div class="dropdown">
             <a
               class="text-muted"
@@ -307,15 +307,15 @@
             <thead class="table-light">
               <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Creation Date</th>
                 <th scope="col">Start Date</th>
                 <th scope="col">Position</th>
+                <th scope="col">Salary</th>
                 <th scope="col">Status</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              {% for employee in employees %}
+              {% for employee in full_time_employees %}
               <tr>
                 <td>
                   <img
@@ -329,11 +329,11 @@
                     >{{ employee.full_name }}</a
                   >
                 </td>
-                <td>{{ employee.creation_date.date }}</td>
+                <td>{{ employee.start_date }}</td>
                 <td>
-                  {{ employee.start_date }}
+                  {{ employee.position }}
                 </td>
-                <td>{{ employee.position }}</td>
+                <td>{{ employee.monthly_salary }}</td>
                 <td>
                   <div class="w-20">
                     {% if employee.active %}
@@ -366,7 +366,7 @@
         </div>
         <div class="card-footer border-0 py-5">
           <span class="text-muted text-sm"
-            >Showing {{ employees.count }} Employees out of {{ employees.count }} results found</span
+            >Showing {{ full_time_employees.count }} Employees out of {{ full_time_employees.count }} results found</span
           >
         </div>
       </div>

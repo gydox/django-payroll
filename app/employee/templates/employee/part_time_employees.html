@@ -2,7 +2,7 @@
 <main class="py-6 bg-surface-secondary">
 
 {% comment %} Full time form start {% endcomment %}
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">  
   {% csrf_token %}
 <div
   class="offcanvas offcanvas-end w-full w-lg-1/3"
@@ -77,7 +77,7 @@
         <div class="ms-5">
           <label for="file-upload" class="btn btn-sm btn-neutral">
             <span>Upload</span>
-            <input type="file" id="file-upload" name="photo" >
+            <input type="file" id="file-upload" name="photo" class="visually-hidden">
           </label>
         </div>
       </div>
@@ -284,7 +284,7 @@
       </div>
       <div class="card">
         <div class="card-header border-bottom d-flex align-items-center">
-          <h5 class="me-auto">All employees</h5>
+          <h5 class="me-auto">Part Time Employees</h5>
           {% comment %} <div class="dropdown">
             <a
               class="text-muted"
@@ -315,7 +315,7 @@
               </tr>
             </thead>
             <tbody>
-              {% for employee in employees %}
+              {% for employee in part_time_employees %}
               <tr>
                 <td>
                   <img
@@ -366,7 +366,7 @@
         </div>
         <div class="card-footer border-0 py-5">
           <span class="text-muted text-sm"
-            >Showing {{ employees.count }} Employees out of {{ employees.count }} results found</span
+            >Showing {{ part_time_employees.count }} Employees out of {{ part_time_employees.count }} results found</span
           >
         </div>
       </div>
