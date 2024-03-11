@@ -34,7 +34,7 @@ PayroLite is a simple payroll system designed to streamline payroll management f
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/PayroLite.git
+git clone https://github.com/gydox/PayroLite.git
 ```
 
 2. Navigate to the project directory:
