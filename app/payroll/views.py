@@ -9,3 +9,10 @@ def payroll(request):
                   template_name="payroll/payroll.html",
                   context={
                   })
+
+@login_required
+def payslip(request):
+    return render(request=request,
+                  template_name="payroll/payslip.html",
+                  context={
+                  })

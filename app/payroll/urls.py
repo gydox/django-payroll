@@ -9,5 +9,5 @@ app_name = "payroll"
 
 urlpatterns = [
     path('', views.payroll, name='payroll'),
-    
+    path('payslip', views.payslip, name='payslip'),
 ]

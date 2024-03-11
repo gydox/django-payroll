@@ -1,0 +1,28 @@
+<header>
+    <div class="container-fluid">
+      <div class="border-bottom pt-6">
+        <div class="row align-items-center">
+          <div class="col-sm col-12">
+            <h1 class="h2 ls-tight">Payroll</h1>
+          </div>
+          <div class="col-sm-auto col-12 mt-4 mt-sm-0">
+            <div class="hstack gap-2 justify-content-sm-end">
+
+
+            </div>
+          </div>
+        </div>
+        <ul class="nav nav-tabs overflow-x border-0">
+          <li class="nav-item">
+            <a href="{% url 'employee:employee_list' %}" class="nav-link {% if request.path == '/employee/' %}active{% endif %}">View all</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'employee:full_time_employees' %}" class="nav-link {% if request.path == '/employee/full_time' %}active{% endif %}">Full Time</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'employee:part_time_employees' %}" class="nav-link {% if request.path == '/employee/part_time' %}active{% endif %}">Part Time</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
