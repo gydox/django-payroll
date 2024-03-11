@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "main",
     "authentication",
     "employee",
+    "payroll",
 ]
 
 MIDDLEWARE = [
