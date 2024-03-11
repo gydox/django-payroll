@@ -37,6 +37,39 @@
         </div>
       </div>
     </div>
+    <script src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'toastr/toastr.min.js' %}"></script>
+
+    <!-- Initialize Toastr -->
+    <script>
+        // Example initialization
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeout": 5000,
+
+        }
+    
+    </script>
+
+    <script>
+      // Function to extract Django messages from the DOM and display them using Toastr
+      function displayMessages() {
+          // Get Django messages from the DOM
+          {% if messages %}
+              {% for message in messages %}
+                  // Display each message using Toastr
+                  toastr.{{ message.tags }}('{{ message }}');
+              {% endfor %}
+          {% endif %}
+      }
+  
+      // Call the function to display messages when the document is ready
+      document.addEventListener('DOMContentLoaded', function() {
+          displayMessages();
+      });
+    </script>
   </body>
 </html>
