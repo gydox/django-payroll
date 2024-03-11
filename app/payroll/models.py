@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import UniqueConstraint
 
-class Payslip(models.Model):
+class Payroll(models.Model):
     YEAR_CHOICES = [
         (2023, '2023'),
         (2024, '2024'),
