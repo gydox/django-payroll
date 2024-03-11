@@ -18,10 +18,7 @@ def employee_list(request):
                 messages.success(request, 'Full Time Employee Created')
                 return redirect('employee:full_time_employees')
             else:
-                # Extract and concatenate form errors into a single string
-                error_messages = "\n".join([f"{field}: {error}"
-                                            for field, error in full_time_form.errors.items()])
-                messages.error(request, error_messages)
+                messages.error(request, full_time_form.errors)
 
         elif 'part_time_submit' in request.POST:
             part_time_form = PartTimeEmployeeForm(request.POST, request.FILES)
