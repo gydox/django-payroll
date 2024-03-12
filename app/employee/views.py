@@ -132,7 +132,7 @@ def edit_employee(request, employee_id):
                 if full_name == employee.full_name:  # Assuming employee has a 'full_name' field
                     employee.delete()
                     messages.success(request, 'Employee deleted successfully')
-                    return redirect('employee:list')  # Redirect to a success URL after deletion
+                    return redirect('employee:employee_list')  # Redirect to a success URL after deletion
                 else:
                     messages.error(request, 'Employee full name does not match')
                     return redirect('employee:edit_employee', employee_id=employee_id)
@@ -146,10 +146,12 @@ def edit_employee(request, employee_id):
                 messages.error(request, form.errors)
     else:
         form = form_class(instance=employee)
+        delete_form = DeleteEmployeeForm()
     return render(request=request,
                   template_name="employee/edit_employee.html",
                   context={
                     'form': form, 
+                    'delete_form': delete_form,
                     'employee_id': employee_id,
                     'messages': messages.get_messages(request),
                   })
