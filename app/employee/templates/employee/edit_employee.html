@@ -142,7 +142,7 @@
               Permanently delete employee and all of its contents. This
               action is not reversible – please be certain.
             </p>
-            <button type="button" class="btn btn-sm btn-danger">
+            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteEmployeeModal">
               Delete employee
             </button>
           </div>
@@ -150,5 +150,25 @@
       </div>
     </div>
   </div>
+
+    <!-- Delete employeeModal -->
+    <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" aria-labelledby="deleteEmployeeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteEmployeeModalLabel">Confirm Employee Deletion</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Please enter the employee's full name to confirm deletion:</p>
+            <form method="post">
+              {% csrf_token %}
+              {{ delete_form.full_name | add_class:"form-control"}}
+              <button type="submit" class="btn btn-danger mt-3" name="delete_employee">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 </main>
 {% endblock %}
