@@ -1,5 +1,7 @@
 from django.db import models
 from django.db.models import UniqueConstraint
+from django.conf import settings
+
 
 class Payroll(models.Model):
     YEAR_CHOICES = [
@@ -36,3 +38,51 @@ class Payroll(models.Model):
 
     def __str__(self):
         return f"Payslip for {self.get_month_display()} {self.year}"
+
+class PayrollItem(models.Model):
+    payroll = models.ForeignKey(Payroll, on_delete=models.CASCADE, related_name='salary_information')
+    employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    # Add more fields as needed
+    
+
+    def __str__(self):
+        return f"Salary information for {self.employee} in {self.payroll.get_month_display()} {self.payroll.year}"
+
+
+class IncomeItem(models.Model):
+    epf = models.BooleanField(default=False)
+    socso = models.BooleanField(default=False)
+    eis = models.BooleanField(default=False)
+    irbm = models.BooleanField(default=False)
+    hrdcorp = models.BooleanField(default=False)
+
+class Earnings(IncomeItem):
+    name = models.CharField(max_length=100)
+
+class Deductions(IncomeItem):
+    name = models.CharField(max_length=100)
+
+
+class EarningAllocation(models.Model):
+    name = models.ForeignKey(Earnings, on_delete=models.CASCADE)
+    employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+class DeductionAllocation(models.Model):
+    name = models.ForeignKey(Deductions, on_delete=models.CASCADE)
+    employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+class EarningAllocationArchive(models.Model):
+    payroll_item = models.ForeignKey(PayrollItem, on_delete=models.CASCADE, related_name='earning_allocations_archive')
+    name = models.CharField(max_length=100)  # Directly store the name
+    employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+class DeductionAllocationArchive(models.Model):
+    payroll_item = models.ForeignKey(PayrollItem, on_delete=models.CASCADE, related_name='deduction_allocations_archive')
+    name = models.CharField(max_length=100)  # Directly store the name
+    employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+
