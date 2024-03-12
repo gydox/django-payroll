@@ -105,14 +105,23 @@ def part_time_employees(request):
 
 @login_required
 def edit_employee(request, employee_id):
-    employee = get_object_or_404(Employee, employee_id=employee_id)
-    form_class = FullTimeEmployeeForm
-    if isinstance(employee, FullTimeEmployee):
+    try:
+        employee = FullTimeEmployee.objects.get(employee_id=employee_id)
+        employee_type = 'full_time'
+    except FullTimeEmployee.DoesNotExist:
+        try:
+            employee = PartTimeEmployee.objects.get(employee_id=employee_id)
+            employee_type = 'part_time'
+        except PartTimeEmployee.DoesNotExist:
+            messages.error(request, "Employee not found")
+            raise Exception("Employee not found")
+
+    if employee_type == 'full_time':
         form_class = FullTimeEmployeeForm
-    elif isinstance(employee, PartTimeEmployee):
+    elif employee_type == 'part_time':
         form_class = PartTimeEmployeeForm
     else:
-        # Handle other cases or raise an error
+        messages.error(request, "Employee instance missmatch error")
         pass
 
     if request.method == 'POST':
