@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import FullTimeEmployeeForm, PartTimeEmployeeForm
 from .models import Employee, FullTimeEmployee, PartTimeEmployee
@@ -105,9 +105,18 @@ def part_time_employees(request):
 
 @login_required
 def edit_employee(request, employee_id):
-    employee = FullTimeEmployee.objects.get(employee_id=employee_id)
+    employee = get_object_or_404(Employee, employee_id=employee_id)
+    form_class = FullTimeEmployeeForm
+    if isinstance(employee, FullTimeEmployee):
+        form_class = FullTimeEmployeeForm
+    elif isinstance(employee, PartTimeEmployee):
+        form_class = PartTimeEmployeeForm
+    else:
+        # Handle other cases or raise an error
+        pass
+
     if request.method == 'POST':
-        form = FullTimeEmployeeForm(request.POST, instance=employee)
+        form = form_class(request.POST, instance=employee)
         if form.is_valid():
             form.save()
             messages.success(request, 'Employee updated')
@@ -115,7 +124,7 @@ def edit_employee(request, employee_id):
         else:
             messages.error(request, form.errors)
     else:
-        form = FullTimeEmployeeForm(instance=employee)
+        form = form_class(instance=employee)
     return render(request=request,
                   template_name="employee/edit_employee.html",
                   context={
