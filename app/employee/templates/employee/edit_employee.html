@@ -81,25 +81,41 @@
 
           <hr class="my-6" />
 
+          {% if 'monthly_salary' in form.fields %}
           <div class="col-md-4">
             <div>
               <label class="form-label">Monthly Salary</label>
               {{form.monthly_salary | add_class:"form-control" }}
             </div>
           </div>
+          {% endif %}
+
+          {% if 'hourly_rate' in form.fields %}
+          <div class="col-md-4">
+            <div>
+              <label class="form-label">Hourly rate</label>
+              {{form.hourly_rate | add_class:"form-control" }}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if 'medical_leave' in form.fields %}
           <div class="col-md-4">
             <div>
               <label class="form-label">Medical Leave</label>
               {{form.medical_leave | add_class:"form-control" }}
             </div>
           </div>
+          {% endif %}
+
+          {% if 'annual_leave' in form.fields %}
           <div class="col-md-4">
             <div>
               <label class="form-label">Annual Leave</label>
               {{form.annual_leave | add_class:"form-control" }}
             </div>
           </div>
-
+          {% endif %}
 
           <div class="col-12">
             <div class="form-check">
