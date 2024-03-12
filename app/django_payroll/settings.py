@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    #Library
+    "widget_tweaks",
+
     # My Apps
     "main",
     "authentication",
