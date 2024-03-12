@@ -110,7 +110,7 @@ def edit_employee(request, employee_id):
         form = FullTimeEmployeeForm(request.POST, instance=employee)
         if form.is_valid():
             form.save()
-            return redirect('employee_detail', employee_id=employee_id)  # Change 'employee_detail' to the name of your detail view
+            return redirect('employee:edit_employee', employee_id=employee_id)
     else:
         form = FullTimeEmployeeForm(instance=employee)
     return render(request=request,
