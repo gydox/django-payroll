@@ -11,6 +11,13 @@ def payroll(request):
                   })
 
 @login_required
+def history(request):
+    return render(request=request,
+                  template_name="payroll/history.html",
+                  context={
+                  })
+
+@login_required
 def payslip(request):
     return render(request=request,
                   template_name="payroll/payslip.html",
