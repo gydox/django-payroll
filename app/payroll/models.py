@@ -42,9 +42,7 @@ class Payroll(models.Model):
 class PayrollItem(models.Model):
     payroll = models.ForeignKey(Payroll, on_delete=models.CASCADE, related_name='salary_information')
     employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    # Add more fields as needed
-    
+    amount = models.DecimalField(max_digits=10, decimal_places=2)    
 
     def __str__(self):
         return f"Salary information for {self.employee} in {self.payroll.get_month_display()} {self.payroll.year}"
