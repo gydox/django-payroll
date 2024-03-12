@@ -110,12 +110,16 @@ def edit_employee(request, employee_id):
         form = FullTimeEmployeeForm(request.POST, instance=employee)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Employee updated')
             return redirect('employee:edit_employee', employee_id=employee_id)
+        else:
+            messages.error(request, form.errors)
     else:
         form = FullTimeEmployeeForm(instance=employee)
     return render(request=request,
                   template_name="employee/edit_employee.html",
                   context={
                     'form': form, 
-                    'employee_id': employee_id
+                    'employee_id': employee_id,
+                    'messages': messages.get_messages(request),
                   })
