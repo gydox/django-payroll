@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import FullTimeEmployeeForm, PartTimeEmployeeForm
+from .forms import FullTimeEmployeeForm, PartTimeEmployeeForm, DeleteEmployeeForm
 from .models import Employee, FullTimeEmployee, PartTimeEmployee
 from django.contrib import messages
 
@@ -125,13 +125,25 @@ def edit_employee(request, employee_id):
         pass
 
     if request.method == 'POST':
-        form = form_class(request.POST, instance=employee)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Employee updated')
-            return redirect('employee:edit_employee', employee_id=employee_id)
+        if 'delete_employee' in request.POST:
+            delete_form = DeleteEmployeeForm(request.POST)
+            if delete_form.is_valid():
+                full_name = delete_form.cleaned_data['full_name']
+                if full_name == employee.full_name:  # Assuming employee has a 'full_name' field
+                    employee.delete()
+                    messages.success(request, 'Employee deleted successfully')
+                    return redirect('employee:list')  # Redirect to a success URL after deletion
+                else:
+                    messages.error(request, 'Employee full name does not match')
+                    return redirect('employee:edit_employee', employee_id=employee_id)
         else:
-            messages.error(request, form.errors)
+            form = form_class(request.POST, instance=employee)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Employee updated')
+                return redirect('employee:edit_employee', employee_id=employee_id)
+            else:
+                messages.error(request, form.errors)
     else:
         form = form_class(instance=employee)
     return render(request=request,
