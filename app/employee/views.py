@@ -104,8 +104,18 @@ def part_time_employees(request):
                   })
 
 @login_required
-def edit_employee(request):
+def edit_employee(request, employee_id):
+    employee = FullTimeEmployee.objects.get(employee_id=employee_id)
+    if request.method == 'POST':
+        form = FullTimeEmployeeForm(request.POST, instance=employee)
+        if form.is_valid():
+            form.save()
+            return redirect('employee_detail', employee_id=employee_id)  # Change 'employee_detail' to the name of your detail view
+    else:
+        form = FullTimeEmployeeForm(instance=employee)
     return render(request=request,
                   template_name="employee/edit_employee.html",
                   context={
+                    'form': form, 
+                    'employee_id': employee_id
                   })
