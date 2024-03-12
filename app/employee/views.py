@@ -8,6 +8,15 @@ from django.contrib import messages
 @login_required
 def employee_list(request):
     employees = Employee.objects.all()
+
+    # Get counts of full-time and part-time employees
+    full_time_employees_count = FullTimeEmployee.objects.count()
+    part_time_employees_count = PartTimeEmployee.objects.count()
+
+    # Get counts of active full-time and part-time employees
+    active_full_time_employees_count = FullTimeEmployee.objects.filter(active=True).count()
+    active_part_time_employees_count = PartTimeEmployee.objects.filter(active=True).count()
+
     full_time_form = FullTimeEmployeeForm()
     part_time_form = PartTimeEmployeeForm()
     if request.method == 'POST':
@@ -34,6 +43,10 @@ def employee_list(request):
                   context={
                         'full_time_form': full_time_form,
                         'part_time_form': part_time_form,
+                        'full_time_employees_count': full_time_employees_count,
+                        'part_time_employees_count': part_time_employees_count,
+                        'active_full_time_employees_count': active_full_time_employees_count,
+                        'active_part_time_employees_count': active_part_time_employees_count,
                         'employees': employees,
                         'messages': messages.get_messages(request),
                   })
