@@ -313,9 +313,9 @@
             <thead class="table-light">
               <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Creation Date</th>
                 <th scope="col">Start Date</th>
                 <th scope="col">Position</th>
+                <th scope="col">Hourly Rate</th>
                 <th scope="col">Status</th>
                 <th></th>
               </tr>
@@ -335,11 +335,9 @@
                     >{{ employee.full_name }}</a
                   >
                 </td>
-                <td>{{ employee.creation_date.date }}</td>
-                <td>
-                  {{ employee.start_date }}
-                </td>
+                <td>{{ employee.start_date }}</td>
                 <td>{{ employee.position }}</td>
+                <td>{{ employee.hourly_rate }}</td>
                 <td>
                   <div class="w-20">
                     {% if employee.active %}
