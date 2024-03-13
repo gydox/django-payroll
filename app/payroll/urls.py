@@ -9,6 +9,7 @@ app_name = "payroll"
 
 urlpatterns = [
     path('', views.payroll, name='payroll'),
+    path('view/<int:payroll_id>', views.payroll_view, name='payroll_view'),
     path('payslip', views.payslip, name='payslip'),
     path('history', views.history, name='history'),
 ]

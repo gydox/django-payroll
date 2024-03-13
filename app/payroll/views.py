@@ -12,6 +12,13 @@ def payroll(request):
                   })
 
 @login_required
+def payroll_view(request, payroll_id):
+    return render(request=request,
+                  template_name="payroll/payroll_view.html",
+                  context={
+                  })
+
+@login_required
 def history(request):
     payrolls = Payroll.objects.all()
 
