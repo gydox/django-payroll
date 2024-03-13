@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from authentication.decorators import unauthenticated_user
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, F, ExpressionWrapper, fields, Avg
 from employee.models import FullTimeEmployee, PartTimeEmployee
 from datetime import datetime, timedelta
+from .models import Company
+from .forms import CompanyForm
+from django.contrib import messages
 
 
 @login_required
@@ -34,4 +37,29 @@ def dashboard(request):
                     'active_full_time_employees': active_full_time_employees,
                     'active_part_time_employees': active_part_time_employees,
                     'average_full_time_salary_formatted': average_full_time_salary_formatted,
+                  })
+
+@login_required
+def settings(request):
+    try:
+        company = Company.objects.get()
+        # If company exists, populate the form with its instance for editing
+        form = CompanyForm(request.POST or None, instance=company)
+    except Company.DoesNotExist:
+        # If no company exists, create a new form for adding company information
+        form = CompanyForm(request.POST or None)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Company informatioon successfully updated")
+            return redirect('main:settings')  # Redirect to the same view after saving the form
+        else:
+            messages.error(request, form.errors)
+
+
+    return render(request=request,
+                  template_name="main/settings.html",
+                  context={
+                    'form':form,
                   })

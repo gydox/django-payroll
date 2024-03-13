@@ -1,0 +1,83 @@
+{% extends "main/base.html" %} 
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<main class="py-6 bg-surface-secondary">
+  <div class="container-fluid max-w-screen-md vstack gap-6">
+    <div>
+      <div class="mb-5"><h4>Company Information</h4></div>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row g-5">
+          <div class="col-md-12">
+            <div>
+              <label class="form-label">Company Name</label>
+              {{ form.name | add_class:"form-control" }}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div>
+              <label class="form-label">Company Number</label>
+              {{ form.number | add_class:"form-control" }}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div>
+              <label class="form-label">Company Address</label>
+              {{ form.address | add_class:"form-control" }}
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div>
+              <label class="form-label">City</label>
+              {{ form.city | add_class:"form-control" }}
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div>
+              <label class="form-label">State</label>
+              {{ form.state | add_class:"form-control" }}
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div>
+              <label class="form-label">Postal Code</label>
+              {{ form.postal_code | add_class:"form-control" }}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div>
+              <label class="form-label">Country</label>
+              {{ form.country | add_class:"form-control" }}
+            </div>
+          </div>
+          <div class="col-12 text-end">
+            <button type="submit" class="btn btn-sm btn-primary">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Delete company modal -->
+    <div class="modal fade" id="deleteCompanyModal" tabindex="-1" aria-labelledby="deleteCompanyModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteCompanyModalLabel">Confirm Company Deletion</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Please enter the company name to confirm deletion:</p>
+            <form method="post">
+              {% csrf_token %}
+              {{ delete_form.name | add_class:"form-control"}}
+              <button type="submit" class="btn btn-danger mt-3" name="delete_company">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
