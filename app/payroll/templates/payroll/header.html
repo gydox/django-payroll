@@ -12,7 +12,7 @@
             </div>
           </div>
         </div>
-        <ul class="nav nav-tabs overflow-x border-0">
+        {% comment %} <ul class="nav nav-tabs overflow-x border-0">
           <li class="nav-item">
             <a href="{% url 'employee:employee_list' %}" class="nav-link {% if request.path == '/employee/' %}active{% endif %}">View all</a>
           </li>
@@ -21,7 +21,7 @@
           </li>
           <li class="nav-item">
             <a href="{% url 'employee:part_time_employees' %}" class="nav-link {% if request.path == '/employee/part_time' %}active{% endif %}">Part Time</a>
-          </li>
+          </li> {% endcomment %}
         </ul>
       </div>
     </div>
