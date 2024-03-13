@@ -180,7 +180,7 @@
               </td>
 
               <td class="text-end">
-                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                <a href="{% url 'employee:edit_employee' employee_id=ft_employee.employee_id %}" class="btn btn-sm btn-neutral">Edit</a>
               </td>
             </tr>
             {% endfor %}
