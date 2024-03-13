@@ -83,15 +83,15 @@
                 </td>
                 <td>
                   <div class="w-20">
-                    {% if payroll.active %}
+                    {% if payroll.processed %}
                     <span
                     class="badge text-uppercase bg-soft-success text-success rounded-pill">
-                      Active
+                      Processed
                     </span>
                     {% else %}
                     <span
-                    class="badge text-uppercase bg-soft-danger text-danger rounded-pill">
-                      Inactive
+                    class="badge text-uppercase bg-soft-warning text-warning rounded-pill">
+                      Unprocessed
                     </span>
                     {% endif %}
                   </div>
