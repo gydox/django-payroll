@@ -30,6 +30,8 @@ class Payroll(models.Model):
     year = models.IntegerField(choices=YEAR_CHOICES)
     month = models.IntegerField(choices=MONTH_CHOICES)
     creation_date = models.DateField(auto_now_add=True)
+    processed = models.BooleanField(default=False)
+
 
     class Meta:
         # Add a unique constraint to ensure no duplicate Payslip for the same month and year

@@ -41,7 +41,20 @@
       </div>
       <div class="card">
         <div class="card-header border-bottom d-flex align-items-center">
-          <h5 class="me-auto">Payroll - {{ payroll.get_month_display }} {{ payroll.year }} </h5>
+          <h5 class="me-auto">
+            Payroll - {{ payroll.get_month_display }} {{ payroll.year }} 
+            {% if payroll.processed %}
+            <span
+            class="badge text-uppercase bg-soft-success text-success rounded-pill">
+              Processed
+            </span>
+            {% else %}
+            <span
+            class="badge text-uppercase bg-soft-danger text-danger rounded-pill">
+              Unprocessed
+            </span>
+            {% endif %}
+          </h5>
           {% comment %} <div class="dropdown">
             <a
               class="text-muted"
