@@ -35,6 +35,11 @@ def payroll_view(request, payroll_id):
     payroll = get_object_or_404(Payroll, pk=payroll_id)
     payroll_items = payroll.payroll_information.all()
 
+    if request.method == 'POST':
+        payroll.processed = True
+        payroll.save()
+        messages.success(request, 'Payroll processed successfully.')
+
     return render(request=request,
                   template_name="payroll/payroll_view.html",
                   context={
