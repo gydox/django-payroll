@@ -19,14 +19,14 @@
               {% endif %}
 
               {% if request.path != '/employee/full_time' %}
-              <a
+              {% comment %} <a
                 href="#partTimeCreate"
                 class="btn btn-sm btn-primary"
                 data-bs-toggle="offcanvas"
                 ><span class="pe-2"
                   ><i class="bi bi-plus-square-dotted"></i> </span
                 ><span>Part Time</span></a
-              >
+              > {% endcomment %}
               {% endif %}
             </div>
           </div>
