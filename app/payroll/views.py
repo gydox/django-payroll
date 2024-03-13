@@ -48,7 +48,13 @@ def create_payroll_items(sender, instance, created, **kwargs):
     Signal receiver function to create PayrollItem instances for active employees
     when a Payroll is created.
     """
+    print("fucntion triggered")
     if created:
+        print("created")
         active_employees = Employee.objects.filter(active=True)
+        print(active_employees)
         for employee in active_employees:
+            print(employee.full_name)
             PayrollItem.objects.create(payroll=instance, employee=employee, amount=0.0)
+    else:
+        print("not created")

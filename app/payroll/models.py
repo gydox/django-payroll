@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import UniqueConstraint
 from django.conf import settings
+from employee.models import Employee
 
 
 class Payroll(models.Model):
@@ -41,7 +42,7 @@ class Payroll(models.Model):
 
 class PayrollItem(models.Model):
     payroll = models.ForeignKey(Payroll, on_delete=models.CASCADE, related_name='payroll_information')
-    employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)    
 
     def __str__(self):
@@ -64,23 +65,23 @@ class Deductions(IncomeItem):
 
 class EarningAllocation(models.Model):
     name = models.ForeignKey(Earnings, on_delete=models.CASCADE)
-    employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 
 class DeductionAllocation(models.Model):
     name = models.ForeignKey(Deductions, on_delete=models.CASCADE)
-    employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 
 class EarningAllocationArchive(models.Model):
     payroll_item = models.ForeignKey(PayrollItem, on_delete=models.CASCADE, related_name='earning_allocations_archive')
     name = models.CharField(max_length=100)  # Directly store the name
-    employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 
 class DeductionAllocationArchive(models.Model):
     payroll_item = models.ForeignKey(PayrollItem, on_delete=models.CASCADE, related_name='deduction_allocations_archive')
     name = models.CharField(max_length=100)  # Directly store the name
-    employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 
