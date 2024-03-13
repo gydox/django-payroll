@@ -8,9 +8,12 @@ from django.dispatch import receiver
 
 @login_required
 def payroll(request):
+    payrolls = Payroll.objects.all().order_by('-year', '-month')
+
     return render(request=request,
                   template_name="payroll/payroll.html",
                   context={
+                    'payrolls': payrolls,
                   })
 
 @login_required

@@ -40,6 +40,16 @@ class Payroll(models.Model):
     def __str__(self):
         return f"Payslip for {self.get_month_display()} {self.year}"
 
+    def get_month_name(month_number):
+        for month_tuple in Payroll.MONTH_CHOICES:
+            if month_tuple[0] == month_number:
+                return month_tuple[1]
+        return None  # Return None if month_number is invalid
+
+    @property
+    def total_amount(self):
+        return sum(item.amount for item in self.payroll_information.all())
+
 class PayrollItem(models.Model):
     payroll = models.ForeignKey(Payroll, on_delete=models.CASCADE, related_name='payroll_information')
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
