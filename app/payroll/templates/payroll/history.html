@@ -66,34 +66,24 @@
                 <th scope="col">Year</th>
                 <th scope="col">Month</th>
                 <th scope="col">Amount</th>
-                <th scope="col">Salary</th>
                 <th scope="col">Status</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              {% for employee in full_time_employees %}
+              {% for payroll in payrolls %}
               <tr>
                 <td>
-                  <img
-                    alt="..."
-                    src="{{ employee.photo_url }}"
-                    class="avatar avatar-sm rounded-circle me-2"
-                  />
-                  <a
-                    class="text-heading text-primary-hover font-semibold"
-                    href="#"
-                    >{{ employee.full_name }}</a
-                  >
+                  {{ payroll.year }}
+                  
                 </td>
-                <td>{{ employee.start_date }}</td>
+                <td>{{ payroll.month }}</td>
                 <td>
-                  {{ employee.position }}
+                  00.00
                 </td>
-                <td>{{ employee.monthly_salary }}</td>
                 <td>
                   <div class="w-20">
-                    {% if employee.active %}
+                    {% if payroll.active %}
                     <span
                     class="badge text-uppercase bg-soft-success text-success rounded-pill">
                       Active
@@ -107,7 +97,7 @@
                   </div>
                 </td>
                 <td class="text-end">
-                  <a href="{% url 'employee:edit_employee' employee_id=employee.employee_id %}" class="btn btn-sm btn-square btn-neutral"
+                  <a href="#" class="btn btn-sm btn-square btn-neutral"
                     ><i class="bi bi-pencil"></i> </a>
                 </td>
               </tr>
@@ -117,7 +107,7 @@
         </div>
         <div class="card-footer border-0 py-5">
           <span class="text-muted text-sm"
-            >Showing {{ full_time_employees.count }} payroll out of {{ payroll.count }} results found 
+            >Showing {{ payrolls.count }} payroll out of {{ payrolls.count }} results found 
             </span
           >
         </div>
