@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from employee.models import Employee, FullTimeEmployee, PartTimeEmployee
 from .models import Payroll, PayrollItem, IncomeItem, Earnings, Deductions, EarningAllocation, DeductionAllocation, EarningAllocationArchive, DeductionAllocationArchive
+from main.models import Company
 from django.contrib import messages
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -60,10 +61,13 @@ def history(request):
 @login_required
 def payslip(request, payroll_item_id):
     payroll_item = get_object_or_404(PayrollItem, pk=payroll_item_id)
+    company = Company.objects.first()
+
     return render(request=request,
                   template_name="payroll/payslip.html",
                   context={
                     'payroll_item': payroll_item,
+                    'company': company,
                   })
 
 @receiver(post_save, sender=Payroll)
