@@ -36,10 +36,12 @@ def history(request):
                   })
 
 @login_required
-def payslip(request):
+def payslip(request, payroll_item_id):
+    payroll_item = get_object_or_404(PayrollItem, pk=payroll_item_id)
     return render(request=request,
                   template_name="payroll/payslip.html",
                   context={
+                    'payroll_item': payroll_item,
                   })
 
 @receiver(post_save, sender=Payroll)

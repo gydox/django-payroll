@@ -74,16 +74,16 @@
               {% for payroll in payroll_items %}
               <tr>
                 <td>
-                  {{ payroll.year }}
+                  {{ payroll.employee.full_name }}
                   
                 </td>
                 <td>{{ payroll.month }}</td>
                 <td>
-                  00.00
+                  {{ payroll.amount }}
                 </td>
                 <td>
                   <div class="w-20">
-                    {% if payroll.active %}
+                    {% if payroll.employee.active %}
                     <span
                     class="badge text-uppercase bg-soft-success text-success rounded-pill">
                       Active
@@ -99,6 +99,8 @@
                 <td class="text-end">
                   <a href="#" class="btn btn-sm btn-square btn-neutral"
                     ><i class="bi bi-pencil"></i> </a>
+                    <a target="_blank" href="{% url 'payroll:payslip' payroll.id %}" class="btn btn-sm btn-square btn-neutral"
+                    ><i class="bi bi-printer"></i> </a>
                 </td>
               </tr>
               {% endfor %}

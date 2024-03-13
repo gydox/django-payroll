@@ -42,14 +42,12 @@
     <div class="row">
       <div class="col-md-4">
         <p><strong>Employee Details:</strong></p>
-        <p>Name: John Doe</p>
-        <p>Employee ID: 12345</p>
-        <p>Position: Web Developer</p>
+        <p>Name: {{payroll_item.employee.full_name}}</p>
+        <p>Employee ID: {{payroll_item.employee.employee_id}}</p>
+        <p>Position: {{payroll_item.employee.position}}</p>
       </div>
       <div class="col-md-4">
-        <p><strong>Pay Period:</strong></p>
-        <p>From: January 1, 2024</p>
-        <p>To: January 15, 2024</p>
+        <p><strong>Pay Period: {{payroll_item.payroll.year}} / {{payroll_item.payroll.month}}</strong></p>
       </div>
       <div class="col-md-4">
         <p><strong>Company Information:</strong></p>
@@ -71,16 +69,13 @@
           <tbody>
             <tr>
               <td>Basic Salary</td>
-              <td>$2000</td>
+              <td>${{payroll_item.amount}}</td>
             </tr>
-            <tr>
-              <td>Bonus</td>
-              <td>$500</td>
-            </tr>
+
             <!-- Add more earnings here -->
             <tr>
               <td><strong>Total Earnings</strong></td>
-              <td><strong>$2500</strong></td>
+              <td><strong>$${{payroll_item.amount}}</strong></td>
             </tr>
           </tbody>
         </table>
@@ -95,18 +90,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            {% comment %} <tr>
               <td>Tax</td>
               <td>$200</td>
             </tr>
             <tr>
               <td>Insurance</td>
-              <td>$100</td>
+              <td>$100</td> {% endcomment %}
             </tr>
             <!-- Add more deductions here -->
             <tr>
               <td><strong>Total Deductions</strong></td>
-              <td><strong>$300</strong></td>
+              <td><strong>$0.00</strong></td>
             </tr>
           </tbody>
         </table>
@@ -118,7 +113,7 @@
           <tbody>
             <tr>
               <td><strong>Net Pay</strong></td>
-              <td><strong>$2200</strong></td>
+              <td><strong>${{payroll_item.amount}}</strong></td>
             </tr>
           </tbody>
         </table>
@@ -126,7 +121,7 @@
     </div>
     <div class="row mt-4">
       <div class="col-md-12 text-center">
-        <button class="btn btn-primary print-btn" onclick="window.print()">Generate payslip</button>
+        <button class="btn btn-primary print-btn"" onclick="window.print()">Generate payslip</button>
       </div>
     </div>
   </div>
