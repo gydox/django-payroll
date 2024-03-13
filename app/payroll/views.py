@@ -16,10 +16,13 @@ def payroll(request):
 @login_required
 def payroll_view(request, payroll_id):
     payroll = get_object_or_404(Payroll, pk=payroll_id)
+    payroll_items = payroll.payroll_information.all()
+
     return render(request=request,
                   template_name="payroll/payroll_view.html",
                   context={
                     'payroll': payroll,
+                    'payroll_items': payroll_items,
                   })
 
 @login_required

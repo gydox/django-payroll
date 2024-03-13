@@ -40,7 +40,7 @@ class Payroll(models.Model):
         return f"Payslip for {self.get_month_display()} {self.year}"
 
 class PayrollItem(models.Model):
-    payroll = models.ForeignKey(Payroll, on_delete=models.CASCADE, related_name='salary_information')
+    payroll = models.ForeignKey(Payroll, on_delete=models.CASCADE, related_name='payroll_information')
     employee = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)    
 
