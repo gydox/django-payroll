@@ -1,5 +1,7 @@
 {% extends "payroll/base.html" %} 
 {% load static %} 
+{% load widget_tweaks %}
+
 {% block content %}
 <main class="py-6 bg-surface-secondary">
 
@@ -52,20 +54,16 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                <form id="createPayrollForm">
+                <form method="post" id="createPayrollForm">
                     {% csrf_token %}
                     <div class="mb-3">
                     <label for="year" class="form-label">Year</label>
-                    <input type="number" class="form-control" id="year" name="year" required>
+                    {{form.year | add_class:"form-select" }}
+
                     </div>
                     <div class="mb-3">
                     <label for="month" class="form-label">Month</label>
-                    <select class="form-select" id="month" name="month" required>
-                        <option value="">Select Month</option>
-                        {% for month_number, month_name in Payroll.MONTH_CHOICES %}
-                        <option value="{{ month_number }}">{{ month_name }}</option>
-                        {% endfor %}
-                    </select>
+                    {{form.month | add_class:"form-select" }}
                     </div>
                     <button type="submit" class="btn btn-primary">Create</button>
                 </form>
@@ -74,7 +72,7 @@
             </div>
         </div>
 
-        
+
       </div>
       <div class="card">
         <div class="card-header border-bottom d-flex align-items-center">

@@ -5,15 +5,29 @@ from .models import Payroll, PayrollItem, IncomeItem, Earnings, Deductions, Earn
 from django.contrib import messages
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from .forms import PayrollForm
+from django.urls import reverse
+
 
 @login_required
 def payroll(request):
-    payrolls = Payroll.objects.all().order_by('-year', '-month')
+    if request.method == 'POST':
+        form = PayrollForm(request.POST)
+        if form.is_valid():
+            payroll_instance = form.save()
+            messages.success(request, "Payroll Created")
+            return redirect(reverse('payroll:payroll_view', kwargs={'payroll_id': payroll_instance.id}))
+        else:
+            messages.error(request, form.errors)
+    else:
+        form = PayrollForm()
 
+    payrolls = Payroll.objects.all().order_by('-year', '-month')
     return render(request=request,
                   template_name="payroll/payroll.html",
                   context={
                     'payrolls': payrolls,
+                    'form': form,
                   })
 
 @login_required
