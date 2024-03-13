@@ -47,7 +47,8 @@
         <p>Position: {{payroll_item.employee.position}}</p>
       </div>
       <div class="col-md-4">
-        <p><strong>Pay Period: {{payroll_item.payroll.year}} / {{payroll_item.payroll.month}}</strong></p>
+        <p><strong>Pay Period:</strong></p>
+        <p>{{payroll_item.payroll.get_month_display}} {{payroll_item.payroll.year}}</p>
       </div>
       <div class="col-md-4">
         <p><strong>Company Information:</strong></p>
@@ -75,7 +76,7 @@
             <!-- Add more earnings here -->
             <tr>
               <td><strong>Total Earnings</strong></td>
-              <td><strong>$${{payroll_item.amount}}</strong></td>
+              <td><strong>${{payroll_item.amount}}</strong></td>
             </tr>
           </tbody>
         </table>
