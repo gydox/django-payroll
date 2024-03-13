@@ -49,12 +49,32 @@ def create_payroll_items(sender, instance, created, **kwargs):
     when a Payroll is created.
     """
     print("fucntion triggered")
+
     if created:
         print("created")
         active_employees = Employee.objects.filter(active=True)
         print(active_employees)
         for employee in active_employees:
-            print(employee.full_name)
-            PayrollItem.objects.create(payroll=instance, employee=employee, amount=0.0)
+            try:
+                employee_obj = FullTimeEmployee.objects.get(employee_id=employee.employee_id)
+                employee_type = 'full_time'
+            except FullTimeEmployee.DoesNotExist:
+                try:
+                    employee_obj = PartTimeEmployee.objects.get(employee_id=employee.employee_id)
+                    employee_type = 'part_time'
+                except PartTimeEmployee.DoesNotExist:
+                    raise Exception("Employee not found")
+            amount = 0.0
+            if employee_type == 'full_time':
+                amount = employee_obj.monthly_salary
+            elif employee_type == 'part_time':
+                amount = employee_obj.hourly_rate
+            else:
+                pass
+            
+            if isinstance(employee, FullTimeEmployee):
+                print("is full time")
+                amount = employee.monthly_salary
+            PayrollItem.objects.create(payroll=instance, employee=employee, amount=amount)
     else:
         print("not created")
